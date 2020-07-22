@@ -6,12 +6,14 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities={Tune.class}, version=1)
+@Database(entities={Tune.class}, version=2)
 public abstract class TunesDB extends RoomDatabase {
+    abstract Playlist playlist();
     private static final String DB_NAME="tunes.db";
     private static TunesDB INSTANCE=null;
 
     synchronized static TunesDB get(Context ctxt) {
+
         if (INSTANCE==null) {
             INSTANCE=create(ctxt, false);
         }

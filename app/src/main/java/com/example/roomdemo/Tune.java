@@ -13,18 +13,17 @@ class Tune {
     @NonNull
     int id;
     String artist, title;
-    int duration;
-    float rating;
 
-    public Tune(int id, String artist, String title, int duration, float rating) {
+
+    public Tune(int id, String artist, String title) {
         this.id = id;
         this.artist = artist;
         this.title = title;
-        this.duration = duration;
-        this.rating = rating;
+
     }
 
-    public String toSting() { return artist + ": " + title ; }
+    @Override
+    public String toString() { return artist + ": " + title ; }
 
 
 }
