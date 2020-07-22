@@ -13,7 +13,7 @@ interface Playlist {
     @Query("SELECT * FROM tunes ORDER BY title")
     List<Tune> selectAll();
 
-    @Query("SELECT * FROM tunes WHERE id=:id")
+    @Query("SELECT * FROM tunes WHERE _id=:id")
     Tune findById(int id);
 
     @Insert
