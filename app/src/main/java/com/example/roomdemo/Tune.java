@@ -3,6 +3,7 @@ package com.example.roomdemo;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Locale;
@@ -16,6 +17,13 @@ class Tune {
     int year;
 
     // ignore annotation here
+    @Ignore
+    public Tune() {
+        this._id = 11;
+        this.year = 1999;
+        this.artist = "";
+        this.title = "";
+    }
 
     public Tune(int _id, String artist, String title, int year) {
         this._id = _id;

@@ -9,8 +9,9 @@ import androidx.room.RoomDatabase;
 @Database(entities={Tune.class}, version=2)
 public abstract class TunesDB extends RoomDatabase {
     abstract Playlist playlist();
+
     private static final String DB_NAME="tunes.db";
-    private static TunesDB INSTANCE=null;
+    private static volatile TunesDB INSTANCE=null;
 
     synchronized static TunesDB get(Context ctxt) {
 

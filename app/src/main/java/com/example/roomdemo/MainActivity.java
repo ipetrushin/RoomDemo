@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
-                SimpleCursorAdapter adapter = new SimpleCursorAdapter(ctx, R.layout.tune_item, c, c.getColumnNames(), new int[]{R.id._id, R.id.artist, R.id.title, R.id.year}, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+                SimpleCursorAdapter adapter =
+                        new SimpleCursorAdapter(ctx, R.layout.tune_item, c, c.getColumnNames(), new int[]{R.id._id, R.id.artist, R.id.title, R.id.year}, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
                 Log.d("mytag", "Records in adapter: " + adapter.getCount());
                 ListView lv = findViewById(R.id.listview);
                 lv.setAdapter(adapter);
@@ -61,14 +61,14 @@ public class MainActivity extends AppCompatActivity {
         new Thread() {
             @Override
             public void run() {
-                Cursor c = db.query("SELECT * FROM tunes", null);
-                Log.d("mytag", "Records before insert: "+c.getCount());
+
                 Playlist playlist = db.playlist();
 
                 Random r = new Random();
-                playlist.insert(new Tune(r.nextInt(10000), "The Prodigy", "Matrix theme", 2000));
+                Tune t = new Tune(r.nextInt(10000), "The Prodigy", "Matrix theme", 2000);
+                playlist.insert(t);
 
-                c = db.query("SELECT * FROM tunes", null);
+                Cursor c = db.query("SELECT * FROM tunes", null);
                 Log.d("mytag", "Records after insert: "+c.getCount());
                 setCursorInUIThread(c);
             }

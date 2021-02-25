@@ -13,6 +13,9 @@ interface Playlist {
     @Query("SELECT * FROM tunes ORDER BY title")
     List<Tune> selectAll();
 
+    @Query("SELECT * FROM tunes WHERE year = 2021 ORDER BY title")
+    List<Tune> selectThisYearTunes();
+
     @Query("SELECT * FROM tunes WHERE _id=:id")
     Tune findById(int id);
 
