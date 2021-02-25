@@ -13,6 +13,9 @@ public interface Manager {
     @Query("SELECT * FROM products ORDER BY _id")
     List<Tune> selectAll();
 
+
+
+
     @Insert
     void insert(Product... products);
 

@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -25,7 +28,35 @@ public class MainActivity extends AppCompatActivity {
 
         // отобразим данные в БД на ListView
         Cursor c = db.query("SELECT * FROM tunes", null);
-        setCursorInUIThread(c);
+        SimpleCursorAdapter adapter =
+                new SimpleCursorAdapter(this, R.layout.tune_item, c, c.getColumnNames(), new int[]{R.id._id, R.id.artist, R.id.title, R.id.year}, CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
+        ListView lv = findViewById(R.id.listview);
+        lv.setAdapter(adapter);
+
+        AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                ColorDrawable d = (ColorDrawable) view.getBackground();
+                if (d != null && d.getColor() == Color.YELLOW) {
+                    view.setBackgroundColor(Color.TRANSPARENT);
+                } else view.setBackgroundColor(Color.YELLOW);
+                // TODO задание: удалить запись, которая выделена пользователем (position - номер в списке)
+
+                Cursor cur = adapter.getCursor();
+                int index = cur.getInt(0);
+                Log.d("mytag", "clicked on id" + index);
+
+
+            }
+        };
+        lv.setOnItemClickListener(listener);
+
+
+        //setCursorInUIThread(c);
+
+        // задание: создать метод для генерации случайных продуктов и
+        // вставки этих данных в таблицу
 
     }
     public void setCursorInUIThread(Cursor c) {
